@@ -55,6 +55,7 @@ article label {
 article#result {
     max-width: none;
     margin-left: 20px;
+    position: relative;
 }
 #demo span {
     width: 300px;
@@ -70,6 +71,17 @@ article#result {
     padding-bottom: 10px;
     margin-bottom: 0;
 }
+.container article button.close {
+    width: auto;
+    float: right;
+    position: absolute;
+    right: 8px;
+    top: 0;
+    background-color: #d7d7d7;
+    color: #333;
+    padding: 6px 8px;
+    border-radius: 10px;
+}
 </style>
 <body>
 <h1>ATM Money Dispenser</h1>
@@ -81,6 +93,7 @@ article#result {
         <button id="enter">Get Money</button>
     </article>
     <article id="result">
+            <button class="close" onclick="myFunction()">X</button>
         <h3 id="title"></h3>
         <p id="demo">
             
@@ -90,8 +103,10 @@ article#result {
     </article>
 </section>
 <script>
+ 
  document.getElementById("result").style.display = "none";
 function withdrawlMoney(amount){
+ 
     var availableNotes = [2000, 500, 200, 100, 50, 20, 10, 5, 2, 1]
     // availableNotes.reverse();
         result = [];
@@ -114,10 +129,11 @@ function withdrawlMoney(amount){
     }
   
     return result;
-   
+    
   }
   
 function enterAmount(){
+  
     document.getElementById("result").style.display = "block";
 	var amount = document.getElementById("amount").value; 
      document.getElementById("title").innerHTML= 'You will get following amount';
@@ -149,15 +165,19 @@ if (cnt > 0) {
      demop.innerHTML += ('<span>' + cnt + 'notes of Rs ' + current + '</span>');
 }
 
- 
+current = withdrawlMoney(amount);
     // console.log( withdrawlMoney(amount));
     // console.log( withdrawlMoney(amount.length));
-      document.getElementById("total").innerHTML= '<b>'+ 'Total notes dispensed: ' + withdrawlMoney(amount).length + '</b>';
+      document.getElementById("total").innerHTML= '<b>'+ 'Total notes dispensed: ' + current.length + '</b>';
     // console.log( withdrawlMoney(amount).length);
    
-   
+  
 }
 document.getElementById("enter").addEventListener("click", enterAmount);
+ 
+function myFunction() {
+    location.reload();
+}       
 </script>
 </body>
 </html>
